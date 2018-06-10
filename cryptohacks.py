@@ -27,7 +27,7 @@ def decodeHex(hexString):
 
 def decodeb64(b64):
     '''Decodes a base 64 string to utf8'''
-    return codecs.decode(str.encode(b64), 'base 64').decode('utf8')
+    return codecs.decode(b64.encode(), 'base 64').decode('utf8')
 
 def hex2b64(hexString):
     '''Converts a hex string to base 64 string. First the hex string is decoded to binary. Then the binary is encoded to base 64.
@@ -39,7 +39,7 @@ def xor(hexString, key):
     Then I utilize the zip function to iterate over both strings one element at a time and xor them.
     Last, I encode back to hex and decode to utf8 for readability.'''
     message = "".join(chr(a ^ b) for a, b in zip(codecs.decode(hexString, 'hex'), codecs.decode(key, 'hex')))
-    return codecs.encode(str.encode(message), 'hex').decode('utf8')
+    return codecs.encode(message.encode(), 'hex').decode('utf8')
 
 def score(string, scoresDict):
     '''Scores the string based on frequency using the scoresDict. Score is rounded to 2 decimal places'''
@@ -57,8 +57,8 @@ def hamming(s1, s2, datatype):
         return None
     scale = 16 #hexadecimal
     if datatype == "utf8":
-        bS1 = bin(int(codecs.encode(str.encode(s1), 'hex'), scale))[2:]
-        bS2 = bin(int(codecs.encode(str.encode(s2), 'hex'), scale))[2:]
+        bS1 = bin(int(codecs.encode(s1.encode(), 'hex'), scale))[2:]
+        bS2 = bin(int(codecs.encode(s2.encode(), 'hex'), scale))[2:]
     elif datatype == "hex":
         bS1 = bin(int(s1, scale))[2:]
         bS2 = bin(int(s2, scale))[2:]
