@@ -19,8 +19,4 @@ print(b64)
 assert b64.strip('\n') == "SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t", "Something went wrong!"
 
 #LIkewise, going backwards should return hexS
-def b642hex(b64):
-    '''Converts a base 64 string to hex string. First the base 64 string is decoded to binary. Then the binary is encoded to hex.
-    Last the hex is decoded to utf8 for readability.'''
-    return codecs.encode(codecs.decode(str.encode(b64), 'base64'), 'hex').decode('utf8')
 print(b642hex(b64))
