@@ -32,7 +32,7 @@ ciphertext = [line.strip() for line in ciphertext]
 #Now convert this list of strings into one big string
 ciphertext = "".join(ciphertext)
 #Since it has been base 64'd, we can decode the base 64 to get the ciphertext that has been xor'd
-ciphertext = codecs.encode(codecs.decode(str.encode(ciphertext), 'base 64'), 'hex').decode('utf8')
+ciphertext = codecs.encode(codecs.decode(ciphertext.encode(), 'base 64'), 'hex').decode('utf8')
 #Notice above the ciphertext is wrapped in a final encode in hex
 #This is needed to get rid of ascii encoding such as "\x42" showing up as "B"
 #Note this will double the length of ciphertext from 2876 to 5752, meaning one char is two elements long
@@ -79,7 +79,7 @@ for i in range(len(textChunks[0])//2):
 
 #Finally with the correct key, encode it in hex
 #Now the ciphertext can be broken down into plaintext
-hexKey = codecs.encode(str.encode(finalKey), 'hex').decode('utf8')
+hexKey = codecs.encode(finalKey.encode(), 'hex').decode('utf8')
 
 #Repeat the key to the same length as the hex encoded text
 repKey = hexKey * (textSize//len(hexKey) + 1)
